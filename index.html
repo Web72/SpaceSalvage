@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Salvage - Jeu Interactif TikTok Live</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0a0a2a;
+            color: #fff;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 157, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.1) 0%, transparent 20%);
+        }
+        .header {
+            background: linear-gradient(45deg, #1a1a4a, #0a0a2a);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid #00ff9d;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 255, 157, 0.1) 0%, transparent 100%);
+            z-index: 1;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+        .header p {
+            font-size: 1.2rem;
+            margin: 1rem 0 0;
+            position: relative;
+            z-index: 2;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid #00ff9d;
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.2);
+        }
+        .feature h2 {
+            color: #00ff9d;
+            margin-top: 0;
+        }
+        .cta-button {
+            background: #00ff9d;
+            color: #0a0a2a;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+        .cta-button:hover {
+            background: #00cc7d;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+        }
+        .admin-link {
+            display: none;
+        }
+        .announcements {
+            margin-top: 2rem;
+        }
+        .announcement {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border: 1px solid #00ff9d;
+            animation: fadeIn 0.5s ease-in;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
+        }
+        .announcement p {
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        .announcement small {
+            color: #00ff9d;
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 0.5rem;
+        }
+        .contact-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid #00ff9d;
+            text-align: center;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        .social-link img {
+            width: 24px;
+            height: 24px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .feature ul, .feature ol {
+            padding-left: 1.5rem;
+        }
+        .feature li {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+        }
+        .terms-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            border: 1px solid #00ff9d;
+            animation: fadeIn 0.5s ease-in;
+        }
+        .terms-section h2 {
+            color: #00ff9d;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        .terms-section h3 {
+            color: #00ff9d;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+        .terms-section p {
+            margin: 0.8rem 0;
+            line-height: 1.6;
+        }
+        .terms-section ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        .terms-section li {
+            margin: 0.5rem 0;
+            line-height: 1.4;
+        }
+        .terms-section .highlight {
+            color: #00ff9d;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Space Salvage</h1>
+        <p>Transformez votre live TikTok en une aventure spatiale interactive !</p>
+    </div>
+
+    <div class="container">
+        <div class="feature">
+            <h2>🎮 À propos du jeu</h2>
+            <p>Space Salvage est un jeu spatial innovant qui transforme votre live TikTok en une expérience interactive unique. Les spectateurs peuvent influencer le gameplay en temps réel !</p>
+        </div>
+
+        <div class="feature">
+            <h2>✨ Fonctionnalités</h2>
+            <ul>
+                <li>🎯 Contrôle du vaisseau spatial en direct</li>
+                <li>🛡️ Bouclier activé par les likes des spectateurs</li>
+                <li>💫 Événements spéciaux déclenchés par les cadeaux TikTok</li>
+                <li>💬 Interaction via les commentaires</li>
+                <li>🏆 Système de score en temps réel</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h2>🎁 Comment ça marche ?</h2>
+            <ol>
+                <li>Lancez votre live TikTok</li>
+                <li>Démarrez Space Salvage</li>
+                <li>Les spectateurs interagissent avec le jeu</li>
+                <li>Profitez d'une expérience de jeu unique !</li>
+            </ol>
+        </div>
+
+        <div class="contact-section">
+            <h2>📱 Contact</h2>
+            <p>Rejoignez notre communauté et restez connecté !</p>
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@brawlmaster_yt133" class="social-link" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+                    Mon compte TikTok
+                </a>
+                <a href="https://discord.gg/PTCuxqcdhp" class="social-link" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord">
+                    Rejoindre le Discord
+                </a>
+            </div>
+        </div>
+
+        <div class="terms-section">
+            <h2>📜 Conditions d'utilisation</h2>
+            
+            <h3>1. Acceptation des conditions</h3>
+            <p>En utilisant Space Salvage, vous acceptez d'être lié par ces conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'application.</p>
+            
+            <h3>2. Âge minimum</h3>
+            <p>Vous devez avoir au moins 13 ans pour utiliser Space Salvage. Si vous avez moins de 13 ans, vous devez obtenir l'autorisation d'un parent ou tuteur légal.</p>
+            
+            <h3>3. Compte et accès</h3>
+            <ul>
+                <li>Vous devez posséder un compte TikTok valide pour utiliser l'application</li>
+                <li>Vous devez être en direct sur TikTok pour jouer</li>
+                <li>Vous êtes responsable de maintenir la confidentialité de votre compte</li>
+            </ul>
+            
+            <h3>4. Règles d'utilisation</h3>
+            <ul>
+                <li>L'application est destinée à un usage personnel uniquement</li>
+                <li>Vous ne devez pas modifier, copier ou distribuer l'application</li>
+                <li>Vous ne devez pas utiliser l'application de manière malveillante</li>
+                <li>Vous devez respecter les conditions d'utilisation de TikTok</li>
+            </ul>
+            
+            <h3>5. Règles de modération</h3>
+            <ul>
+                <li>Le streamer se réserve le droit de modérer les commentaires</li>
+                <li>Les commentaires inappropriés peuvent entraîner l'exclusion du jeu</li>
+                <li>Respectez les règles de la communauté TikTok</li>
+            </ul>
+            
+            <h3>6. Limitation de responsabilité</h3>
+            <p>Space Salvage est fourni "tel quel", sans garantie d'aucune sorte. Nous ne sommes pas responsables des problèmes de connexion, des pertes de données ou des dommages indirects.</p>
+            
+            <h3>7. Modifications</h3>
+            <p>Nous nous réservons le droit de modifier ces conditions à tout moment. Les modifications seront effectives dès leur publication sur l'application.</p>
+            
+            <h3>8. Contact</h3>
+            <p>Pour toute question concernant ces conditions, veuillez nous contacter via notre serveur Discord ou notre compte TikTok.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>🔒 Politique de confidentialité</h2>
+            
+            <h3>1. Collecte des données</h3>
+            <p>Space Salvage collecte uniquement les données nécessaires au fonctionnement du jeu :</p>
+            <ul>
+                <li>Nom d'utilisateur TikTok (pour l'interaction en direct)</li>
+                <li>Commentaires (pour les interactions en jeu)</li>
+                <li>Données de jeu (score, actions)</li>
+            </ul>
+            
+            <h3>2. Utilisation des données</h3>
+            <p>Les données collectées sont utilisées uniquement pour :</p>
+            <ul>
+                <li>Permettre l'interaction en direct pendant les streams</li>
+                <li>Gérer le système de score et les récompenses</li>
+                <li>Améliorer l'expérience de jeu</li>
+            </ul>
+            
+            <h3>3. Stockage des données</h3>
+            <p>Les données sont stockées localement sur votre appareil et ne sont pas partagées avec des tiers. Aucune donnée n'est conservée sur nos serveurs.</p>
+            
+            <h3>4. Cookies et stockage local</h3>
+            <p>Space Salvage utilise le stockage local de votre navigateur pour :</p>
+            <ul>
+                <li>Sauvegarder vos préférences de jeu</li>
+                <li>Conserver votre session de jeu</li>
+                <li>Stocker les annonces importantes</li>
+            </ul>
+            
+            <h3>5. Vos droits</h3>
+            <p>Vous avez le droit de :</p>
+            <ul>
+                <li>Accéder à vos données</li>
+                <li>Supprimer vos données</li>
+                <li>Refuser la collecte de certaines données</li>
+            </ul>
+            
+            <h3>6. Protection des données</h3>
+            <p>Nous nous engageons à protéger vos données en :</p>
+            <ul>
+                <li>N'utilisant que des connexions sécurisées</li>
+                <li>Ne partageant jamais vos données avec des tiers</li>
+                <li>Limitant la collecte aux données strictement nécessaires</li>
+            </ul>
+            
+            <h3>7. Modifications</h3>
+            <p>Nous nous réservons le droit de modifier cette politique de confidentialité. Les modifications seront effectives dès leur publication sur l'application.</p>
+            
+            <h3>8. Contact</h3>
+            <p>Pour toute question concernant la confidentialité de vos données, veuillez nous contacter via notre serveur Discord ou notre compte TikTok.</p>
+        </div>
+
+        <div class="announcements">
+            <h2>📢 Dernières annonces</h2>
+            <div id="announcementsList"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="https://discord.gg/PTCuxqcdhp" class="cta-button" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 10px;">
+                Rejoindre le Discord pour télécharger
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour charger les annonces
+        function loadAnnouncements() {
+            const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+            const container = document.getElementById('announcementsList');
+            
+            if (announcements.length === 0) {
+                container.innerHTML = '<div class="announcement"><p>Aucune annonce pour le moment.</p></div>';
+                return;
+            }
+
+            container.innerHTML = announcements.map(ann => `
+                <div class="announcement">
+                    <p>${ann.text}</p>
+                    <small>${ann.date}</small>
+                </div>
+            `).join('');
+        }
+
+        // Charger les annonces au chargement de la page
+        document.addEventListener('DOMContentLoaded', loadAnnouncements);
+
+        // Recharger les annonces toutes les 30 secondes
+        setInterval(loadAnnouncements, 30000);
+    </script>
+</body>
+</html> 
